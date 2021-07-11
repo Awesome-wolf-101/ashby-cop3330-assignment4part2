@@ -64,7 +64,7 @@ class ListManagerController{
     +onlyIncompleteItems()
     +PutDataToString()
     +PutDataToFile()
-    +FindIndexToDeleteInDataList()
+    +FindIndexInAnotherList()
     +GetLastString()
     +AddAnItem()
     +DeleteanItem()
