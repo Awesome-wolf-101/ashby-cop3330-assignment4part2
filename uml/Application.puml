@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class App{
+
++main()
++start()
+}
+
+class Item{
+    - String Description
+    - String DueDate
+    - string completed
+
+    +iscompleted()
+    +setcompleted()
+    +getDueDate()
+    +setDueDate()
+    +getDescription()
+    +setDescription()
+
+}
+
+class ListManagerController{
+    -Boolean showallitems
+    -Boolean showincompleteitems
+    -Boolean showcompleteitems
+
+    - TableView ToDoListViewer;
+    - TableColumn DueDateTableColumn;
+    - TableColumn CompletedTableColumn;
+    - TableColumn DescriptionTableColumn;
+
+    - TextField AddItemDescriptionTextField;
+    - TextField AddItemDueDateTextField;
+    - TextField EditCurrentItemDescriptionTextField;
+    - TextField EditCurrentItemDescriptionDueDate;
+    - TextField LoadListTextField;
+    - TextField SaveListTextField;
+
+    -ObservableList<Item> data
+    -ObservableList<Item> incompletedata
+    -ObservableList<Item> completedata
+
+    +initialize()
+    +AddItemClicked()
+    +DeleteCurrentItemClicked()
+    +ClearAllListItemsClicked()
+    +ShowOnlyCompleteItemsCllicked()
+    +ShowOnlyIncompleteItemsCllicked()
+    +MakeCurrentItemIncompleteClicked()
+    +MakeCurrentItemCompleteClicked()
+    +ShowAllItemsClicked()
+    +EditItemDueDateClicked()
+    +EditItemDesciptionClicked()
+    +SaveThisListClicked()
+    +LoadSavedListClicked()
+
+    +dateValidation()
+    +ClearList()
+    +checkDate()
+    +checkDescriptionLength()
+    +onlyCompleteItems()
+    +onlyIncompleteItems()
+    +PutDataToString()
+    +PutDataToFile()
+    +FindIndexToDeleteInDataList()
+    +GetLastString()
+    +AddAnItem()
+    +DeleteanItem()
+    +IncompleteanItem()
+    +CompleteanItem()
+    +LoadAList()
+    +ChangeItemDescription()
+    +ChangeItemDueDate()
+}
+
+
+
+App -- ListManagerController
+ListManagerController -- Item
+@enduml

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ListManagerController">
+   <children>
+      <AnchorPane layoutX="-3.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="717.0">
+         <children>
+            <Button id="5445" fx:id="AddButton" layoutX="53.0" layoutY="367.0" mnemonicParsing="false" onAction="#AddItemClicked" text="Add Item" />
+            <Button layoutX="53.0" layoutY="408.0" mnemonicParsing="false" onAction="#DeleteCurrentItemClicked" text="Delete Currently Clicked Item" />
+            <Button layoutX="53.0" layoutY="446.0" mnemonicParsing="false" onAction="#ClearAllListItemsClicked" text="Clear all list items" />
+            <Button layoutX="50.0" layoutY="482.0" mnemonicParsing="false" onAction="#ShowOnlyIncompleteItemsCllicked" text="Show only incomplete items" />
+            <Button layoutX="50.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShowOnlyCompleteItemsCllicked" text="Show only complete Items" />
+            <Button layoutX="264.0" layoutY="522.0" mnemonicParsing="false" onAction="#MakeCurrentItemIncompleteClicked" text="Make current Item Incomplete" />
+            <Button layoutX="268.0" layoutY="565.0" mnemonicParsing="false" onAction="#MakeCurrentItemCompleteClicked" text="Make current Item Complete" />
+            <Button layoutX="46.0" layoutY="565.0" mnemonicParsing="false" onAction="#ShowAllItemsClicked" text="Show all items" />
+            <Button layoutX="275.0" layoutY="482.0" mnemonicParsing="false" onAction="#EditItemDueDateClicked" text="edit current item due date" />
+            <Button layoutX="275.0" layoutY="408.0" mnemonicParsing="false" onAction="#EditItemDesciptionClicked" text="edit current item description" />
+            <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#SaveThisListClicked" text="Save this List" />
+            <Button layoutX="437.0" layoutY="10.0" mnemonicParsing="false" onAction="#LoadSavedListClicked" text="Load Saved List" />
+            <TextField fx:id="AddItemDescriptionTextField" layoutX="135.0" layoutY="367.0" />
+            <TextField fx:id="AddItemDueDateTextField" layoutX="300.0" layoutY="373.0" />
+            <Text layoutX="151.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Item Description" />
+            <Text layoutX="314.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Item Due Date" />
+            <TextField fx:id="EditCurrentItemDescriptionTextField" layoutX="453.0" layoutY="408.0" />
+            <TextField fx:id="EditCurrentItemDescriptionDueDate" layoutX="453.0" layoutY="482.0" />
+            <Text layoutX="495.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Description" />
+            <Text layoutX="472.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New DueDate" />
+            <Text layoutX="400.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of List To Be Loaded:" />
+            <TextField fx:id="LoadListTextField" layoutX="546.0" layoutY="35.0" />
+            <TableView fx:id="ToDoListViewer" editable="true" layoutX="92.0" layoutY="68.0" prefHeight="253.0" prefWidth="582.0">
+              <columns>
+                <TableColumn fx:id="DueDateTableColumn" prefWidth="75.0" text="DueDate" />
+                <TableColumn fx:id="CompletedTableColumn" prefWidth="76.0" text="Completed?" />
+                  <TableColumn fx:id="DescriptionTableColumn" prefWidth="430.0" text="Description" />
+              </columns>
+            </TableView>
+            <Text layoutX="15.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of file to save this list to:" wrappingWidth="185.576171875" />
+            <TextField fx:id="SaveListTextField" layoutX="201.0" layoutY="35.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
