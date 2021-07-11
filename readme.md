@@ -12,6 +12,7 @@ In order to add an item enter the New item's Desired due-date
 in the "new item Due Date" textfield, and the New item's Desired description
 in the "new item Description" textfield, then press the "add item" button.
 The new item will be marked as incomplete by default.
+-----------
 #Remove an item from the list
 -----------
 In order to remove an item from a list, click the item you wish to delete
