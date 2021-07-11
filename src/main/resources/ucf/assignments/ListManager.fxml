@@ -42,6 +42,7 @@
             </TableView>
             <Text layoutX="15.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of file to save this list to:" wrappingWidth="185.576171875" />
             <TextField fx:id="SaveListTextField" layoutX="201.0" layoutY="35.0" />
+            <Button layoutX="50.0" layoutY="599.0" mnemonicParsing="false" onAction="#SortListClicked" text="Sort This List" />
          </children>
       </AnchorPane>
    </children>

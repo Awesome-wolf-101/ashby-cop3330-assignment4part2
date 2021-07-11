@@ -160,8 +160,8 @@ public class ListManagerController implements Initializable {
         //set all of the boolean values for list to be shown to false
         //except for incomplete items which should be set to true
         showincompleteitems = true;
-        showcompleteitems = false;
         showallitems = false;
+        showcompleteitems = false;
         //set the table view items to incomplete data
         ToDoListViewer.getItems().setAll(incompletedata);
     }
@@ -236,7 +236,7 @@ public class ListManagerController implements Initializable {
             //call the auxillary function complete an item
             //to make an item complete in both the data list and the
             //complete items list
-            CompleteanItem(data, completedata, thingToEdit);
+            CompleteanItem(data, incompletedata, thingToEdit);
             //call the functions only incomplete items
             //and only complete items
             //to update all the datalists
@@ -262,7 +262,7 @@ public class ListManagerController implements Initializable {
     public void ShowAllItemsClicked(ActionEvent actionEvent) {
         //set all of the boolean values for list to be shown to false
         //except for show all items which should be set to true
-        showallitems = true;
+        showallitems= true;
         showcompleteitems = false;
         showincompleteitems = false;
         //set the table view items to incomplete data
@@ -392,6 +392,33 @@ public class ListManagerController implements Initializable {
         }
     }
 
+    @FXML
+    public void SortListClicked(ActionEvent actionEvent) {
+        if(showcompleteitems)
+        {
+            //call sort list on the complete data list
+            SortList(completedata);
+            //set the table view items to complete data
+            ToDoListViewer.getItems().setAll(completedata);
+        }
+        //if only incomplete items are supposed to be shown to the user
+        if(showincompleteitems)
+        {
+            //call sort list on the complete data list
+            SortList(incompletedata);
+            //set the table view items to complete data
+            ToDoListViewer.getItems().setAll(incompletedata);
+        }
+        //if all items are supposed to be shown to the user
+        if(showallitems)
+        {
+            //call sort list on the incomplete data list
+            SortList(data);
+            //set the table view items to all data
+            ToDoListViewer.getItems().setAll(data);
+        }
+
+    }
 
     public  boolean dateValidation(String date)
     {
@@ -540,7 +567,7 @@ public class ListManagerController implements Initializable {
         for(int i = 2; i < strarr.length; i++)
         {
             //add each string to the output string while also adding a space
-           OutputString += strarr[i] + " ";
+            OutputString += strarr[i] + " ";
         }
         //return the output string
         return OutputString;
@@ -559,8 +586,8 @@ public class ListManagerController implements Initializable {
         //if both passed lists are the same
         if(list.equals(list2))
         {
-          //remove the item from the list
-          list.remove(currentDeleteIndex);
+            //remove the item from the list
+            list.remove(currentDeleteIndex);
         }
         //if both passed list are not the same
         else
@@ -568,7 +595,7 @@ public class ListManagerController implements Initializable {
             //find the index of the item in the second list using
             //the auxillary function FindIndexOfItemInAnotherList
             //and store that index in a new variable
-            int DataDeleteIndex = FindIndexOfItemInAnotherList(list2.get(currentDeleteIndex), data);
+            int DataDeleteIndex = FindIndexOfItemInAnotherList(list2.get(currentDeleteIndex), list);
             //remove the item from one list using the passed in index
             list2.remove(currentDeleteIndex);
             //remove the item from the other list using the found index
@@ -593,7 +620,7 @@ public class ListManagerController implements Initializable {
             //find the index of the item in the second list using
             //the auxillary function FindIndexOfItemInAnotherList
             //and store that index in a new variable
-            int DataIncompleteIndex = FindIndexOfItemInAnotherList( list2.get(currentEditIndex), data);
+            int DataIncompleteIndex = FindIndexOfItemInAnotherList( list2.get(currentEditIndex), list);
             //set the completed status of one list's item to incomplete using the found index
             list.get(DataIncompleteIndex).setCompleted("incomplete");
         }
@@ -615,7 +642,7 @@ public class ListManagerController implements Initializable {
             //find the index of the item in the second list using
             //the auxillary function FindIndexOfItemInAnotherList
             //and store that index in a new variable
-            int DataIncompleteIndex = FindIndexOfItemInAnotherList( list2.get(currentEditIndex), data );
+            int DataIncompleteIndex = FindIndexOfItemInAnotherList( list2.get(currentEditIndex), list );
             //set the completed status of one list's item to incomplete using the found index
             list.get(DataIncompleteIndex).setCompleted("complete");
         }
@@ -670,7 +697,7 @@ public class ListManagerController implements Initializable {
         {
             //using the auxillary function FindIndexOfItemInAnotherList get the index
             //of the new item to edit in the other list and store the index in a new variable
-            int DataEditIndex = FindIndexOfItemInAnotherList(list2.get(EditIndex), data);
+            int DataEditIndex = FindIndexOfItemInAnotherList(list2.get(EditIndex), list);
             //edit description of the item in the list given by the passed index EditIndex
             list2.get(EditIndex).setDescription(NewDescription);
             //edit description of the item in the other list given by the calculated index DataEditIndex
@@ -691,7 +718,7 @@ public class ListManagerController implements Initializable {
         {
             //using the auxillary function FindIndexOfItemInAnotherList get the index
             //of the new item to edit in the other list and store the index in a new variable
-            int DataEditIndex = FindIndexOfItemInAnotherList(list2.get(EditIndex), data);
+            int DataEditIndex = FindIndexOfItemInAnotherList(list2.get(EditIndex), list);
             //edit DueDate of the item in the list given by the passed index EditIndex
             list2.get(EditIndex).setDueDate(NewDueDate);
             //edit DueDate of the item in the other list given by the calculated index DataEditIndex
@@ -700,4 +727,11 @@ public class ListManagerController implements Initializable {
 
     }
 
+    public static void  SortList(ObservableList<Item> myList)
+    {
+        //make a new comparator for the item object, using the item's due date
+        Comparator<Item> studentComparator = Comparator.comparing(Item::getDueDate);
+        //sort the list passed into the function
+        myList.sort(studentComparator);
+    }
 }

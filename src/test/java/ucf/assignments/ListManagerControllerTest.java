@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ListManagerControllerTest  {
 
+
     //test if an item can be added to the list (requirement #4)
     @Test
     void AddAnItem() {
@@ -354,4 +355,48 @@ class ListManagerControllerTest  {
         //see if the item has a new changed duedate using assert equals
         assertEquals("2021-09-03", data.get(0).getDueDate());
     }
+
+    //test if an you can sort a list by due date (requirement bonus)
+    @Test
+    void sortList() {
+        //make a new controller
+        ListManagerController controller = new ListManagerController();
+        //make an observable list
+        ObservableList<Item> data = FXCollections.observableArrayList();
+        //populate the observable list that is out of order
+        controller.AddAnItem(data, "2020-03-04", "eat at Dino's");
+        controller.AddAnItem(data, "2021-04-05", "do laundry");
+        controller.AddAnItem(data, "2002-07-23", "eat pie");
+        //call sortlist on the observable list
+        controller.SortList(data);
+        //use a boolean variable to test if the item at the first index of data
+        //has the description of the item that comes first by due date
+        boolean actual = data.get(0).getDescription().equals("eat pie");
+        //make sure the boolean variable is true
+        assertEquals(true, actual);
+
+    }
+
+
+/*
+    //test if an you can change which list is shown by entering boolean values
+    // within the application this is used for only showing the complete items(requirement #10)
+    @Test
+    void changeBooleanValues() {
+        //make a new controller
+        ListManagerController controller = new ListManagerController();
+        //make three boolean values
+        boolean b1 = false;
+        boolean b2 = true;
+        boolean b3 = true;
+        //call the function
+        controller.ChangeBooleanValues(b1, b2, b3);
+        //make a boolean variable to make sure that all the values are what they should be
+        boolean actual = (b1 == true  && (b2 == false) && (b3 == false));
+        //see if the boolean variable is true
+        assertEquals(true, actual);
+
+    }
+*/
+
 }
