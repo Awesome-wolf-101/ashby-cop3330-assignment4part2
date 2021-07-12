@@ -88,7 +88,7 @@ public class ListManagerController implements Initializable {
             int thingToDelete = ToDoListViewer.getSelectionModel().getSelectedIndex();
             //get the list to use using the auxillary function obtainListToUse
             ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
-            //use the axuillary function delete an item and pass in the List to use
+            //use the auxillary function delete an item and pass in the List to use
             DeleteAnItem(data, listToUse, thingToDelete);
             //set the table view items to complete data
             ToDoListViewer.getItems().setAll(listToUse);
@@ -157,7 +157,7 @@ public class ListManagerController implements Initializable {
         //get the index currently clicked by the user
         int thingToEdit= ToDoListViewer.getSelectionModel().getSelectedIndex();
 
-            //use the auxillary funcion obtainListToUse to obtain the list to use
+            //use the auxillary function obtainListToUse to obtain the list to use
             ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
             //display the List To use
             ToDoListViewer.getItems().setAll(listToUse);
@@ -196,7 +196,7 @@ public class ListManagerController implements Initializable {
         {
             //get the index to edit
             int IndexToEdit = ToDoListViewer.getSelectionModel().getSelectedIndex();
-            //use the auxillary funcion obtainListToUse to obtain the list to use
+            //use the auxillary function obtainListToUse to obtain the list to use
             ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
             //use the auxillary function change due date to change the due date
             //in both the complete data and data lists
@@ -209,14 +209,14 @@ public class ListManagerController implements Initializable {
 
     @FXML
     public void EditItemDescriptionClicked(ActionEvent actionEvent) {
-        //get the text in the edit Desciption field
+        //get the text in the edit Description field
         String NewDescription = EditCurrentItemDescriptionTextField.getText();
         //if the description entered is of a valid length
         if(checkDescriptionLength(NewDescription))
         {
             //get the index to edit
             int IndexToEdit = ToDoListViewer.getSelectionModel().getSelectedIndex();
-            //use the auxillary funcion obtainListToUse to obtain the list to use
+            //use the auxillary function obtainListToUse to obtain the list to use
             ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
             //use the auxillary function change due date to change the due date
             //in both the complete data and data lists
@@ -295,7 +295,8 @@ public class ListManagerController implements Initializable {
         //make a boolean value false to begin with
         boolean status = false;
         //make sure the data is in the correct format ("dddd-dd-dd" where d is any number)
-        if (checkDate(date)) {
+        if (checkDate(date))
+        {
             //make a new instance of a simple date format with "yyyy-MM-dd"
             //is the correct pattern
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -398,7 +399,7 @@ public class ListManagerController implements Initializable {
         String Pathname2 = System.getProperty("user.dir") + "\\\\" + "SavedLists"+ "\\\\" + UserFileName + ".txt";
         //create a new file object based on this pathname
         File file4 = new File(Pathname2);
-        //use a try block and a cathc block
+        //use a try block and a catch block
         try {
             file4.createNewFile();
             //make a file writer
@@ -432,7 +433,7 @@ public class ListManagerController implements Initializable {
     {
         //make an output string
         String OutputString = "";
-        //sart at the third index of the arraystring and loop
+        //start at the third index of the string array and loop
         //through the array using a for loop
         for(int i = 2; i < strarr.length; i++)
         {
@@ -525,7 +526,7 @@ public class ListManagerController implements Initializable {
         //make a temporarylist to store the read data
         ObservableList<Item> templist = FXCollections.observableArrayList();
         //while the file still has lines
-        while(sc.hasNextLine() )
+        while(sc.hasNextLine())
         {
             //make each line into a string
             String ItemString = sc.nextLine();
