@@ -96,7 +96,7 @@ Load a list (and all of its items) from external storage
 -----------
 To load a list (and all of its items) from external storage
 enter the name of the file in the "Name of List be loaded"
-text field (Note do not add an extention such as .txt,
+text field (Note: do not add an extention such as .txt,
 this is done automatically) and then click the "Load Saved List" button.
 This will load the list into the program.
 
