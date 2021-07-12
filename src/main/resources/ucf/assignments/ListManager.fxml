@@ -14,13 +14,13 @@
             <Button id="5445" fx:id="AddButton" layoutX="53.0" layoutY="367.0" mnemonicParsing="false" onAction="#AddItemClicked" text="Add Item" />
             <Button layoutX="53.0" layoutY="408.0" mnemonicParsing="false" onAction="#DeleteCurrentItemClicked" text="Delete Currently Clicked Item" />
             <Button layoutX="53.0" layoutY="446.0" mnemonicParsing="false" onAction="#ClearAllListItemsClicked" text="Clear all list items" />
-            <Button layoutX="50.0" layoutY="482.0" mnemonicParsing="false" onAction="#ShowOnlyIncompleteItemsCllicked" text="Show only incomplete items" />
-            <Button layoutX="50.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShowOnlyCompleteItemsCllicked" text="Show only complete Items" />
+            <Button layoutX="50.0" layoutY="482.0" mnemonicParsing="false" onAction="#ShowOnlyIncompleteItemsClicked" text="Show only incomplete items" />
+            <Button layoutX="50.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShowOnlyCompleteItemsClicked" text="Show only complete Items" />
             <Button layoutX="264.0" layoutY="522.0" mnemonicParsing="false" onAction="#MakeCurrentItemIncompleteClicked" text="Make current Item Incomplete" />
             <Button layoutX="268.0" layoutY="565.0" mnemonicParsing="false" onAction="#MakeCurrentItemCompleteClicked" text="Make current Item Complete" />
             <Button layoutX="46.0" layoutY="565.0" mnemonicParsing="false" onAction="#ShowAllItemsClicked" text="Show all items" />
             <Button layoutX="275.0" layoutY="482.0" mnemonicParsing="false" onAction="#EditItemDueDateClicked" text="edit current item due date" />
-            <Button layoutX="275.0" layoutY="408.0" mnemonicParsing="false" onAction="#EditItemDesciptionClicked" text="edit current item description" />
+            <Button layoutX="275.0" layoutY="408.0" mnemonicParsing="false" onAction="#EditItemDescriptionClicked" text="edit current item description" />
             <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#SaveThisListClicked" text="Save this List" />
             <Button layoutX="437.0" layoutY="10.0" mnemonicParsing="false" onAction="#LoadSavedListClicked" text="Load Saved List" />
             <TextField fx:id="AddItemDescriptionTextField" layoutX="135.0" layoutY="367.0" />
@@ -43,6 +43,7 @@
             <Text layoutX="15.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of file to save this list to:" wrappingWidth="185.576171875" />
             <TextField fx:id="SaveListTextField" layoutX="201.0" layoutY="35.0" />
             <Button layoutX="50.0" layoutY="599.0" mnemonicParsing="false" onAction="#SortListClicked" text="Sort This List" />
+            <Button layoutX="274.0" layoutY="599.0" mnemonicParsing="false" onAction="#Make100ItemsClicked" text="Make 100 Items" />
          </children>
       </AnchorPane>
    </children>

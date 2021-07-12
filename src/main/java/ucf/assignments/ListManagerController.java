@@ -53,7 +53,7 @@ public class ListManagerController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle rb)
     {
-        //set each collumn to a new value using .setCellValueFactory
+        //set each column to a new value using .setCellValueFactory
         DueDateTableColumn.setCellValueFactory(new PropertyValueFactory("DueDate"));
         CompletedTableColumn.setCellValueFactory(new PropertyValueFactory("completed"));
         DescriptionTableColumn.setCellValueFactory(new PropertyValueFactory("Description"));
@@ -69,34 +69,16 @@ public class ListManagerController implements Initializable {
         //using the auxillary functions dateValidation and checkDescriptionLength
         if(dateValidation(NewDueDate) && checkDescriptionLength(NewDescription))
         {
-            //if only completed items are supposed to be shown to the user
-            if(showcompleteitems)
-            {
                 //call the auxillary function add an item,
                 AddAnItem(data, NewDueDate, NewDescription);
-                //call the auxillary function only complete items
+                //call the auxillary function only complete items and only incomplete items
                 onlyCompleteItems(completedata, data);
-                //set the table view items to complete data
-                ToDoListViewer.getItems().setAll(completedata);
-            }
-            //if only incompleted items are supposed to be shown to the user
-            if(showincompleteitems)
-            {
-                //call the auxillary function add an item,
-                AddAnItem(data, NewDueDate, NewDescription);
-                //call the auxillary function only incomplete items
                 onlyIncompleteItems(incompletedata, data);
-                //set the table view items to incomplete data
-                ToDoListViewer.getItems().setAll(incompletedata);
-            }
-            //if all items are supposed to be shown to the user
-            if(showallitems)
-            {
-                //add an item to data
-                AddAnItem(data, NewDueDate, NewDescription);
-                //set the table view items to all data
-                ToDoListViewer.getItems().setAll(data);
-            }
+                //get the list to use using the auxillary function obtainListToUse
+                ObservableList<Item> listToDisplay = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+                //set the table view items to complete data
+                ToDoListViewer.getItems().setAll(listToDisplay);
+
         }
     }
 
@@ -104,30 +86,12 @@ public class ListManagerController implements Initializable {
     public void DeleteCurrentItemClicked(ActionEvent actionEvent) {
             //obtain the index of the item the user is currently clicking on
             int thingToDelete = ToDoListViewer.getSelectionModel().getSelectedIndex();
-            //if only complete items are supposed to be shown to the user
-            if(showcompleteitems)
-            {
-                //use the axuillary function delete an item and pass in the completedata
-                DeleteanItem(data, completedata, thingToDelete);
-                //set the table view items to complete data
-                ToDoListViewer.getItems().setAll(completedata);
-            }
-            //if only complete items are supposed to be shown to the user
-            if(showincompleteitems)
-            {
-                //use the axuillary function delete an item and pass in the incompletedata
-                DeleteanItem(data, incompletedata, thingToDelete);
-                //set the table view items to incomplete data
-                ToDoListViewer.getItems().setAll(incompletedata);
-            }
-            //if all items are supposed to be shown to the user
-            if(showallitems)
-            {
-                //use the axuillary function delete an item and pass in the data
-                DeleteanItem(data, data, thingToDelete);
-                //set the table view items to all data
-                ToDoListViewer.getItems().setAll(data);
-            }
+            //get the list to use using the auxillary function obtainListToUse
+            ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+            //use the axuillary function delete an item and pass in the List to use
+            DeleteAnItem(data, listToUse, thingToDelete);
+            //set the table view items to complete data
+            ToDoListViewer.getItems().setAll(listToUse);
     }
 
     @FXML
@@ -139,7 +103,7 @@ public class ListManagerController implements Initializable {
     }
 
     @FXML
-    public void ShowOnlyCompleteItemsCllicked(ActionEvent actionEvent) {
+    public void ShowOnlyCompleteItemsClicked(ActionEvent actionEvent) {
         //call the auxillary function only complete items to update
         //the complete data observable list
         onlyCompleteItems(completedata, data);
@@ -153,7 +117,7 @@ public class ListManagerController implements Initializable {
     }
 
     @FXML
-    public void ShowOnlyIncompleteItemsCllicked(ActionEvent actionEvent) {
+    public void ShowOnlyIncompleteItemsClicked(ActionEvent actionEvent) {
         //call the auxillary function only incomplete items to update
         //the incomplete data observable list
         onlyIncompleteItems(incompletedata, data);
@@ -170,92 +134,45 @@ public class ListManagerController implements Initializable {
     public void MakeCurrentItemIncompleteClicked(ActionEvent actionEvent) {
         //get the index currently clicked by the user
         int thingToEdit= ToDoListViewer.getSelectionModel().getSelectedIndex();
-        //if only complete items are supposed to be shown to the user
-        if(showcompleteitems)
-        {
-            //call the auxillary function incomplete an item
-            //to make an item incomplete in both the data list and the
-            //complete items list
-            IncompleteanItem(data, completedata, thingToEdit);
-            //call the functions only incomplete items
-            //and only complete items
-            //to update all the datalists
-            onlyIncompleteItems(incompletedata, data);
-            onlyCompleteItems(completedata, data);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(completedata);
-        }
-        //if only incomplete items are supposed to be shown to the user
-        if(showincompleteitems)
-        {
-            //call the auxillary function incomplete an item
-            //to make an item incomplete in both the data list and the
-            //incomplete items list
-            IncompleteanItem(data, incompletedata, thingToEdit);
-            //call the functions only incomplete items
-            //and only complete items
-            //to update all the datalists
-            onlyIncompleteItems(incompletedata, data);
-            onlyCompleteItems(completedata, data);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(incompletedata);
-        }
-        //if all items are supposed to be shown to the user
-        if(showallitems)
-        {
-            //call the auxillary function incomplete an item
-            //to make an item incomplete in the data list
-            IncompleteanItem(data, data, thingToEdit);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(data);
-        }
+
+        //use the auxillary funcion obtainListToUse to obtain the list to use
+        ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+        //display the List To use
+        ToDoListViewer.getItems().setAll(listToUse);
+        //call the auxillary function Incomplete an item
+        //to make an item complete in both the data list and the
+        //complete items list
+        IncompleteanItem(data, listToUse, thingToEdit);
+        //call the functions only incomplete items
+        //and only complete items
+        //to update all the datalists
+        onlyIncompleteItems(incompletedata, data);
+        onlyCompleteItems(completedata, data);
+        //display the List To use
+        ToDoListViewer.getItems().setAll(listToUse);
     }
 
     @FXML
     public void MakeCurrentItemCompleteClicked(ActionEvent actionEvent) {
         //get the index currently clicked by the user
         int thingToEdit= ToDoListViewer.getSelectionModel().getSelectedIndex();
-        //if only complete items are supposed to be shown to the user
-        if(showcompleteitems)
-        {
+
+            //use the auxillary funcion obtainListToUse to obtain the list to use
+            ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+            //display the List To use
+            ToDoListViewer.getItems().setAll(listToUse);
             //call the auxillary function complete an item
             //to make an item complete in both the data list and the
             //complete items list
-            CompleteanItem(data, completedata, thingToEdit);
+            CompleteanItem(data, listToUse, thingToEdit);
             //call the functions only incomplete items
             //and only complete items
             //to update all the datalists
             onlyIncompleteItems(incompletedata, data);
             onlyCompleteItems(completedata, data);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(completedata);
-        }
-        //if only incomplete items are supposed to be shown to the user
-        if(showincompleteitems)
-        {
-            //call the auxillary function complete an item
-            //to make an item complete in both the data list and the
-            //complete items list
-            CompleteanItem(data, incompletedata, thingToEdit);
-            //call the functions only incomplete items
-            //and only complete items
-            //to update all the datalists
-            onlyIncompleteItems(incompletedata, data);
-            onlyCompleteItems(completedata, data);
-            //set the table view items to incomplete data
-            ToDoListViewer.getItems().setAll(incompletedata);
-        }
-        //if all items are supposed to be shown to the user
-        if(showallitems)
-        {
-            //call the auxillary function incomplete an item
-            //to make an item complete in both the data list and the
-            //complete items list
-            CompleteanItem(data, data, thingToEdit);
-            //set the table view items to incomplete data
-            ToDoListViewer.getItems().setAll(data);
-        }
-;
+            //display the List To use
+            ToDoListViewer.getItems().setAll(listToUse);
+
     }
 
     @FXML
@@ -265,8 +182,9 @@ public class ListManagerController implements Initializable {
         showallitems= true;
         showcompleteitems = false;
         showincompleteitems = false;
+        ObservableList<Item> listToDisplay = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
         //set the table view items to incomplete data
-        ToDoListViewer.getItems().setAll(data);
+        ToDoListViewer.getItems().setAll(listToDisplay);
     }
 
     @FXML
@@ -278,38 +196,19 @@ public class ListManagerController implements Initializable {
         {
             //get the index to edit
             int IndexToEdit = ToDoListViewer.getSelectionModel().getSelectedIndex();
-            //if only completed items are supposed to be shown to the user
-            if(showcompleteitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in both the complete data and data lists
-                ChangeItemDueDate(data, completedata, IndexToEdit, NewDueDate);
-                //display the complete data
-                ToDoListViewer.getItems().setAll(completedata);
-            }
-            //if only incompleted items are supposed to be shown to the user
-            if(showincompleteitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in both the incomplete data and data lists
-                ChangeItemDueDate(data, incompletedata, IndexToEdit, NewDueDate);
-                //display the incomplete data
-                ToDoListViewer.getItems().setAll(incompletedata);
-            }
-            //if all items are supposed to be shown to the user
-            if(showallitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in the data list
-                ChangeItemDueDate(data, data, IndexToEdit, NewDueDate);
-                //display all the data
-                ToDoListViewer.getItems().setAll(data);
-            }
+            //use the auxillary funcion obtainListToUse to obtain the list to use
+            ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+            //use the auxillary function change due date to change the due date
+            //in both the complete data and data lists
+            ChangeItemDueDate(data, listToUse, IndexToEdit, NewDueDate);
+            //display the List To use
+            ToDoListViewer.getItems().setAll(listToUse);
+
         }
     }
 
     @FXML
-    public void EditItemDesciptionClicked(ActionEvent actionEvent) {
+    public void EditItemDescriptionClicked(ActionEvent actionEvent) {
         //get the text in the edit Desciption field
         String NewDescription = EditCurrentItemDescriptionTextField.getText();
         //if the description entered is of a valid length
@@ -317,33 +216,13 @@ public class ListManagerController implements Initializable {
         {
             //get the index to edit
             int IndexToEdit = ToDoListViewer.getSelectionModel().getSelectedIndex();
-            //if only completed items are supposed to be shown to the user
-            if(showcompleteitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in both the complete data and data lists
-                ChangeItemDescription(data, completedata, IndexToEdit, NewDescription);
-                //display the complete data
-                ToDoListViewer.getItems().setAll(completedata);
-            }
-            //if only incompleted items are supposed to be shown to the user
-            if(showincompleteitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in both the incomplete data and data lists
-                ChangeItemDescription(data, incompletedata, IndexToEdit, NewDescription);
-                //display the incomplete data
-                ToDoListViewer.getItems().setAll(incompletedata);
-            }
-            //if all items are supposed to be shown to the user
-            if(showallitems)
-            {
-                //use the auxillary function change due date to change the due date
-                //in the data list
-                ChangeItemDescription(data, data, IndexToEdit, NewDescription);
-                //display all the data
-                ToDoListViewer.getItems().setAll(data);
-            }
+            //use the auxillary funcion obtainListToUse to obtain the list to use
+            ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+            //use the auxillary function change due date to change the due date
+            //in both the complete data and data lists
+            ChangeItemDescription(data, listToUse, IndexToEdit, NewDescription);
+            //display the List To use
+            ToDoListViewer.getItems().setAll(listToUse);
         }
     }
 
@@ -394,30 +273,21 @@ public class ListManagerController implements Initializable {
 
     @FXML
     public void SortListClicked(ActionEvent actionEvent) {
-        if(showcompleteitems)
-        {
-            //call sort list on the complete data list
-            SortList(completedata);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(completedata);
-        }
-        //if only incomplete items are supposed to be shown to the user
-        if(showincompleteitems)
-        {
-            //call sort list on the complete data list
-            SortList(incompletedata);
-            //set the table view items to complete data
-            ToDoListViewer.getItems().setAll(incompletedata);
-        }
-        //if all items are supposed to be shown to the user
-        if(showallitems)
-        {
-            //call sort list on the incomplete data list
-            SortList(data);
-            //set the table view items to all data
-            ToDoListViewer.getItems().setAll(data);
-        }
+        //use the auxillary funcion obtainListToUse to obtain the list to use
+        ObservableList<Item> listToUse = ObtainListToUse(showallitems, showcompleteitems, showincompleteitems, data, completedata, incompletedata);
+        //call sort list on the complete data list
+        SortList(listToUse);
+        //set the table view items to complete data
+        ToDoListViewer.getItems().setAll(listToUse);
 
+    }
+
+    @FXML
+    public void Make100ItemsClicked(ActionEvent actionEvent) {
+        //call make 100 item on data
+        Make100Items(data);
+        // view the list
+        ToDoListViewer.getItems().setAll(data);
     }
 
     public  boolean dateValidation(String date)
@@ -581,7 +451,7 @@ public class ListManagerController implements Initializable {
         list.add(tempitem);
     }
 
-    public void DeleteanItem(ObservableList<Item> list, ObservableList<Item> list2, int currentDeleteIndex)
+    public void DeleteAnItem(ObservableList<Item> list, ObservableList<Item> list2, int currentDeleteIndex)
     {
         //if both passed lists are the same
         if(list.equals(list2))
@@ -733,5 +603,55 @@ public class ListManagerController implements Initializable {
         Comparator<Item> studentComparator = Comparator.comparing(Item::getDueDate);
         //sort the list passed into the function
         myList.sort(studentComparator);
+    }
+
+    public static void  Make100Items(ObservableList<Item> myList)
+    {
+        //create a for loop
+        for(int i = 0; i < 100; i++)
+        {
+            //if the number to add tot he due date is only one digit
+            if(i <= 9)
+            {
+                //make a new due date string
+                String NewDueDate = "200"+ i +"-03-04";
+                //create a new item using this string
+                Item tempitem = new Item(NewDueDate,"Hello");
+                //add this item to the list passed into the function
+                myList.add(tempitem);
+            }
+            //if the number has 2 digits
+            else if(i <= 100)
+            {
+                //make a new due date string
+                String NewDueDate = "20"+ i +"-03-04";
+                //create a new item using this string
+                Item tempitem = new Item(NewDueDate,"Hello");
+                //add this item to the list passed into the function
+                myList.add(tempitem);
+            }
+        }
+    }
+
+    public static ObservableList<Item> ObtainListToUse(boolean b1, boolean b2, boolean b3, ObservableList<Item> list1, ObservableList<Item> list2, ObservableList<Item> list3)
+    {
+        //if the first boolean is true
+        if(b1)
+        {
+            //return the first list
+            return list1;
+        }
+        //if the second boolean is true
+        else if(b2)
+        {
+            //return the second list
+            return list2;
+        }
+        //if the third boolean is true
+        else
+        {
+            //return the third list
+            return list3;
+        }
     }
 }

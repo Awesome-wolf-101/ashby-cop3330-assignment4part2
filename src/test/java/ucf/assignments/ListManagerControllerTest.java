@@ -6,25 +6,11 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import org.junit.jupiter.api.Test;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -107,7 +93,7 @@ class ListManagerControllerTest  {
         controller.AddAnItem(data, "2020-04-05", "do laundry");
         controller.AddAnItem(data, "2020-07-23", "eat pie");
         //delete the item at the second index
-        controller.DeleteanItem(data, data, 1);
+        controller.DeleteAnItem(data, data, 1);
         //make a boolean variable to store the result of if
         //the description of the second index is the description of the formerly
         //thrid index
@@ -377,26 +363,45 @@ class ListManagerControllerTest  {
 
     }
 
-
-/*
-    //test if an you can change which list is shown by entering boolean values
-    // within the application this is used for only showing the complete items(requirement #10)
+    //test if an a list can hold at least 100 items (requirement #1)
     @Test
-    void changeBooleanValues() {
+    void make100Items() {
         //make a new controller
         ListManagerController controller = new ListManagerController();
-        //make three boolean values
-        boolean b1 = false;
-        boolean b2 = true;
-        boolean b3 = true;
-        //call the function
-        controller.ChangeBooleanValues(b1, b2, b3);
-        //make a boolean variable to make sure that all the values are what they should be
-        boolean actual = (b1 == true  && (b2 == false) && (b3 == false));
-        //see if the boolean variable is true
+        //make an observable list
+        ObservableList<Item> data = FXCollections.observableArrayList();
+        //populate the observable list by calling make100Items
+        controller.Make100Items(data);
+        //use a boolean variable to test if the item at the first index of data
+        //has the description of the item that comes first by due date
+        boolean actual = data.get(99).getDueDate().equals("2099-03-04");
+        //make sure the boolean variable is true
         assertEquals(true, actual);
-
     }
-*/
+
+    @Test
+    void obtainListToShow() {
+        //make a new controller
+        ListManagerController controller = new ListManagerController();
+        //make an observable list
+        ObservableList<Item> data = FXCollections.observableArrayList();
+        //make an observable list
+        ObservableList<Item> incompletedata = FXCollections.observableArrayList();
+        //make an observable list
+        ObservableList<Item> completedata = FXCollections.observableArrayList();
+        //make three boolean values
+        boolean b1 = true;
+        boolean b2 = false;
+        boolean b3 = false;
+        //make a list to store the value of obtainListToShow
+        ObservableList<Item> listToDisplay = controller.ObtainListToUse(b1, b2, b3, data, completedata, incompletedata);
+        //use a boolean variable to test if the list returned by
+        // listToDisplay is equal to the first list declared
+        boolean actual = listToDisplay.equals(data);
+        //make sure the boolean variable is true
+        assertEquals(true, actual);
+    }
+
+
 
 }

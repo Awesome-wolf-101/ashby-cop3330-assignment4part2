@@ -55,6 +55,8 @@ class ListManagerController{
     +EditItemDesciptionClicked()
     +SaveThisListClicked()
     +LoadSavedListClicked()
+    +SortListClicked()
+    +Make100ItemsClicked()
 
     +dateValidation()
     +ClearList()
@@ -73,6 +75,9 @@ class ListManagerController{
     +LoadAList()
     +ChangeItemDescription()
     +ChangeItemDueDate()
+    +SortList()
+    +Make100Items()
+    +obtainListToUse()
 }
 
 
