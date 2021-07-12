@@ -379,6 +379,7 @@ class ListManagerControllerTest  {
         assertEquals(true, actual);
     }
 
+    //test if the correct list to show is returned given a set of boolean values (requirement #10)
     @Test
     void obtainListToShow() {
         //make a new controller
