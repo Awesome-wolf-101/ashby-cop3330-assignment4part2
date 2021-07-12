@@ -21,8 +21,8 @@ Add an Item to the list
 -----------
 
 In order to add an item enter the New item's Desired due-date
-in the "new item Due Date" textfield, and the New item's Desired description
-in the "new item Description" textfield, then press the "add item" button.
+in the "New item Due Date" textfield, and the New item's Desired description
+in the "New item Description" textfield, then press the "add item" button.
 The new item will be marked as incomplete by default.
 (Note: the new due date must be a valid date on the gregorian calendar of
 the form: "yyyy-mm-dd")
@@ -46,7 +46,7 @@ you wish to edit, then enter a new description in the "New Description"
 textfield, then click the "Edit current item description" button.
 (Note: the new due date must be a valid date on the gregorian calendar of
 the form: "yyyy-mm-dd")
-(Note: If the requirements for either the description are not
+(Note: If the requirements for the description are not
 met the currently clicked item will not be edited)
 
 Edit the due date of an item within the list
@@ -62,8 +62,8 @@ Mark an item in the list as either complete or incomplete
 -----------
 To mark an item in the list as either complete or incomplete
 click the item you wish to edit. If you wish to mark the item as incomplete
-click the "Make Current item Incomplete" button. If you wish to mark the 
-item as complete click the "Make Current item Complete button."
+click the "Make current item Incomplete" button. If you wish to mark the 
+item as complete click the "Make current item Complete button."
 
 Display all of the existing items in the list
 -----------
@@ -89,7 +89,7 @@ this is done automatically) and then click the "Save this list" button.
 This will save the list to a folder named "SavedLists" within 
 the program's working directory. (Note: if you enter the name of a 
 file that already exists in the "Saved Lists" directory, clicking 
-the "Save this list" button will overwrite what is already 
+the "Save this List" button will overwrite what is already 
 written in this file)
 
 Load a list (and all of its items) from external storage
@@ -103,5 +103,5 @@ This will load the list into the program.
 Sort The List by due date
 -----------
 To sort the list by due date, click the "DueDate" column in table view.
-You also have the option of clicking the "Sort This List Button"
+You also have the option of clicking the "Sort This List" Button.
 
