@@ -43,7 +43,7 @@ Edit the description of an item within the list
 -----------
 To edit the description of an item within the list, click the item
 you wish to edit, then enter a new description in the "New Description"
-textfield, then click the "edit current item description" button.
+textfield, then click the "Edit current item description" button.
 (Note: the new due date must be a valid date on the gregorian calendar of
 the form: "yyyy-mm-dd")
 (Note: If the requirements for either the description are not
@@ -53,7 +53,7 @@ Edit the due date of an item within the list
 -----------
 To edit the due date of an item within the list, click the item
 you wish to edit, then enter a new due date in the "New due date"
-textfield, then click the "edit current item due date" button.
+textfield, then click the "Edit current item due date" button.
 (Note: the new description must be between 1 and 256 characters inclusive)
 (Note: If the requirements for either the duedate are not
 met the currently clicked item will not be edited)

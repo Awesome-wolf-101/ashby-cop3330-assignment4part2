@@ -19,8 +19,8 @@
             <Button layoutX="264.0" layoutY="522.0" mnemonicParsing="false" onAction="#MakeCurrentItemIncompleteClicked" text="Make current Item Incomplete" />
             <Button layoutX="268.0" layoutY="565.0" mnemonicParsing="false" onAction="#MakeCurrentItemCompleteClicked" text="Make current Item Complete" />
             <Button layoutX="46.0" layoutY="565.0" mnemonicParsing="false" onAction="#ShowAllItemsClicked" text="Show all items" />
-            <Button layoutX="275.0" layoutY="482.0" mnemonicParsing="false" onAction="#EditItemDueDateClicked" text="edit current item due date" />
-            <Button layoutX="275.0" layoutY="408.0" mnemonicParsing="false" onAction="#EditItemDescriptionClicked" text="edit current item description" />
+            <Button layoutX="275.0" layoutY="482.0" mnemonicParsing="false" onAction="#EditItemDueDateClicked" text="Edit current item due date" />
+            <Button layoutX="275.0" layoutY="408.0" mnemonicParsing="false" onAction="#EditItemDescriptionClicked" text="Edit current item description" />
             <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#SaveThisListClicked" text="Save this List" />
             <Button layoutX="437.0" layoutY="10.0" mnemonicParsing="false" onAction="#LoadSavedListClicked" text="Load Saved List" />
             <TextField fx:id="AddItemDescriptionTextField" layoutX="135.0" layoutY="367.0" />
